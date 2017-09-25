@@ -1,0 +1,27 @@
+{
+  "name": "lemmings",
+  "version": "1.0.0",
+  "description": "retro game ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alessiobortone2/lemmings.git"
+  },
+  "author": "alessio jenny david adam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alessiobortone2/lemmings/issues"
+  },
+  "homepage": "https://github.com/alessiobortone2/lemmings#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "matter-js": "^0.13.0",
+    "matter-tools": "^0.11.1",
+    "mocha": "^3.5.3"
+  }
+}
