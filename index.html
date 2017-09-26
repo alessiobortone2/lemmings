@@ -22,7 +22,13 @@
       }
     });
 
-    g = new Grid(40, 20);
+    layerNodes = 40;
+    layers = 20;
+    cutOutCount = 15;
+    minCutOutSize = 5;
+    maxCutOutSize = 20;
+    grid = randomGrid(layerNodes, layers, cutOutCount, minCutOutSize, maxCutOutSize)
+
     run();
 
   </script>
