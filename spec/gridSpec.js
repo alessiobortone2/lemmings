@@ -83,11 +83,18 @@ describe ('Grid', function () {
   describe ('Grid#getNode', function (){
 
     beforeEach(function () {
+      nodes = 5;
+      layers = 5;
+      grid = new Grid(nodes, layers);
+      grid.generate();
 
+      for (var i = 0; i < grid.nodes.length; i++) {
+        grid.nodes[i] = i;
+      }
     });
 
     it ('returns correct node', function () {
-
+      expect(grid.getNode(2, 3)).toEqual(17);
     });
   });
 
@@ -97,23 +104,23 @@ describe ('Grid', function () {
 
     });
 
-    it ('destroys non-protected nodes', function () {
+    xit ('destroys non-protected nodes', function () {
 
     });
 
-    it ('does not destroy protected nodes') {
+    xit ('does not destroy protected nodes', function () {
 
-    }
+    });
   });
 });
 
-describe ('#randomGrid', function (){
-
-  beforeEach(function () {
-
-  });
-
-  // it ('', function () {
-  //
-  // });
-});
+// describe ('#randomGrid', function (){
+//
+//   beforeEach(function () {
+//
+//   });
+//
+//   xit ('', function () {
+//
+//   });
+// });
