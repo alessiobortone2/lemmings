@@ -1,11 +1,12 @@
-// (function (exports){
-var Matter = require('../js/lib/matter.js')
-var Bodies = Matter.Bodies;
+(function (exports){
+// var Matter = require('../js/lib/matter.js')
+// var Bodies = Matter.Bodies;
 
 var Lemming = function(){
   this.shape = Bodies.rectangle(400, 0, 80, 80);
   console.log(this.shape);
+  World.add(engine.world, [this.shape]);
 };
-module.exports = Lemming;
-// exports.Lemming = Lemming;
-// })(this)
+// module.exports = Lemming;
+exports.Lemming = Lemming;
+})(this)

@@ -1,5 +1,4 @@
-var assert = require('assert');
-var Lemming = require('../js/lemming');
+var assert = chai.assert;
 describe('Lemming', function() {
   describe('when initialized', function() {
     it('should have equal height and width', function() {
