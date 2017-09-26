@@ -5,6 +5,7 @@
     this.xNodes = nodes;
     this.layers = layers
     this.blockSize = canvasSize.width / this.xNodes;
+    this.nodes = []
     this.generate();
   }
 
@@ -23,8 +24,13 @@
     for (var i = 0; i < this.xNodes; i++) {
       block = Bodies.rectangle(startX, y, this.blockSize, this.blockSize, { isStatic: true });
       World.add(engine.world, [block]);
+      this.nodes += block
       startX += this.blockSize
     }
+  }
+
+  Grid.prototype.getNode = function (x, y) {
+    return this.nodes[(this.xNodes*y) + x]
   }
 
   exports.Grid = Grid
