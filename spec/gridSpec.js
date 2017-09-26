@@ -104,7 +104,7 @@ describe ('Grid', function () {
 
     });
 
-    xit ('destroys non-protected nodes', function () {
+    xit ('destroys correct node (providing they are not protected)', function () {
 
     });
 
