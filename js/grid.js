@@ -9,7 +9,6 @@
     this.layers = layers
     this.blockSize = canvasSize.width / this.xNodes;
     this.nodes = []
-    this.generate();
   }
 
   Grid.prototype.generate = function(){
@@ -59,6 +58,7 @@
 
   var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
     grid = new Grid(xNodes, yNodes);
+    grid.generate();
     for (var i = 0; i < 5; i++) {
       x = randomRange(grid.xNodes);
       y = randomRange(grid.layers);
