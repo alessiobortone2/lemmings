@@ -24,10 +24,20 @@
       }
     });
 
+    g = new Grid(80, 48);
+  
+
     lemming = new Lemming();
 
-    g = new Grid(80, 48);
+    Events.on(engine, 'collisionStart', function(event){
+      // Matter.Body.translate(lemming.shape, { x: 4, y: 0 });
+      Matter.Body.setVelocity(lemming.shape, { x: 8, y: 0 });
+    });
+
+
+
     run();
+
 
   </script>
 </body>
