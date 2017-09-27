@@ -4,8 +4,8 @@
     return Math.floor(Math.random() * max);
   }
 
-  function createBlock(x, y, size) {
-    block = Bodies.rectangle(x, y, size, size, { isStatic: true });
+  function createBlock(x, y, size, style = {}, sensor = false ) {
+    block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
     World.add(engine.world, [block]);
     return block;
   }
@@ -23,10 +23,26 @@
     this.layers = layers
     this.blockSize = canvasSize.width / this.xNodes;
     this.nodes = [];
+    this.spawn = null
+    this.exit = null
 
     for (var i = 0; i < (this.layers * this.xNodes); i++) {
       this.nodes.push(null);
     }
+  }
+
+  Grid.prototype.entranceBlock = function(x, y) {
+    var place = grid2Pix(x, y, this.blockSize)
+    var block = createBlock(place.x, place.y, this.blockSize, { fillStyle: "red"}, true )
+    this.setNode(x, y, block)
+    this.spawn = place
+  }
+
+  Grid.prototype.exitBlock = function(x, y) {
+    var place = grid2Pix(x, y, this.blockSize)
+    var block = createBlock(place.x, place.y, this.blockSize, { fillStyle: "green"}, true)
+    this.setNode(x, y, block)
+    this.exit = place
   }
 
   Grid.prototype.generateBucket = function (arguments) {
@@ -36,10 +52,10 @@
   }
 
   Grid.prototype.generateColumn = function (x) {
-    place = grid2Pix(x, 0, this.blockSize);
+    var place = grid2Pix(x, 0, this.blockSize);
     for (var i = 0; i < this.layers; i++) {
       if (this.getNode(x, this.layers - i) === null) {
-        block = createBlock(place.x, place.y, this.blockSize);
+        var block = createBlock(place.x, place.y, this.blockSize);
         this.setNode(x, this.layers - i, block)
       }
       place.y -= this.blockSize
@@ -47,21 +63,21 @@
   }
 
   Grid.prototype.generateLine = function (y) {
-    place = grid2Pix(0, y, this.blockSize);
+    var place = grid2Pix(0, y, this.blockSize);
     for (var i = 0; i < this.xNodes; i++) {
-      block = createBlock(place.x, place.y, this.blockSize);
+      var block = createBlock(place.x, place.y, this.blockSize);
       this.setNode(i, y, block)
       place.x += this.blockSize
     }
   }
 
   Grid.prototype.getNode = function (x, y) {
-    index = (this.xNodes*y) + x;
+    var index = (this.xNodes*y) + x;
     return this.nodes[index];
   }
 
   Grid.prototype.setNode = function (x, y, value) {
-    index = (this.xNodes*y) + x;
+    var index = (this.xNodes*y) + x;
     this.nodes[index] = value;
   }
 
@@ -71,18 +87,18 @@
     }
   }
 
-  var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
-    grid = new Grid(xNodes, yNodes);
-    grid.generate();
-    for (var i = 0; i < 5; i++) {
-      x = randomRange(grid.xNodes);
-      y = randomRange(grid.layers);
-      xSize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-      ySize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-      grid.cutOut(x, y, xSize, ySize);
-    }
-    return grid;
-  }
+  // var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
+  //   grid = new Grid(xNodes, yNodes);
+  //   grid.generate();
+  //   for (var i = 0; i < 5; i++) {
+  //     x = randomRange(grid.xNodes);
+  //     y = randomRange(grid.layers);
+  //     xSize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
+  //     ySize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
+  //     grid.cutOut(x, y, xSize, ySize);
+  //   }
+  //   return grid;
+  // }
 
   exports.Grid = Grid;
   exports.randomGrid = randomGrid;
