@@ -18,11 +18,18 @@
         engine: engine,
         options: {
           width: canvasSize.width,
-          height: canvasSize.height
+          height: canvasSize.height,
+          wireframes: false
       }
     });
 
-    g = new Grid(40, 20);
+    layerNodes = 40;
+    layers = 20;
+    grid = new Grid(layerNodes, layers);
+    grid.generateBucket();
+    grid.entranceBlock(2, 10);
+    grid.exitBlock(37, 1)
+
     run();
 
   </script>
