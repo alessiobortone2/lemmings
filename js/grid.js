@@ -103,6 +103,5 @@
   // }
 
   exports.Grid = Grid;
-  exports.randomGrid = randomGrid;
 
 })(this);
