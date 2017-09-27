@@ -39,6 +39,8 @@
     var startX = halfBlockSize;
     for (var i = 0; i < this.xNodes; i++) {
       block = Bodies.rectangle(startX, y, this.blockSize, this.blockSize, { isStatic: true });
+      block.restitution = 0;
+      block.friction = 0;
       World.add(engine.world, [block]);
       this.nodes.push(block);
       startX += this.blockSize;

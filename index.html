@@ -32,12 +32,11 @@
 
     Events.on(engine, 'collisionStart', function(event){
       // Matter.Body.translate(lemming.shape, { x: 4, y: 0 });
-      if (lemming.velocity.y > 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: 8, y: 0 });
-      }
-      else if (lemming.velocity.x > 0){
-        Matter.Body.setVelocity(lemming.shape, { x: -8, y: 0 });
+      if (lemming.shape.velocity.y > 0) {
+        Matter.Body.setVelocity(lemming.shape, { x: 2, y: 0 })
       };
+
+
     });
 
 
