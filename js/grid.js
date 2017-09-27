@@ -66,6 +66,8 @@
     var place = grid2Pix(0, y, this.blockSize);
     for (var i = 0; i < this.xNodes; i++) {
       var block = createBlock(place.x, place.y, this.blockSize);
+      block.restitution = 0;
+      block.friction = 0;
       this.setNode(i, y, block)
       place.x += this.blockSize
     }

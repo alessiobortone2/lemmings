@@ -3,8 +3,10 @@
 <meta name="author" content="John Day">
 <script src="js/lib/matter.js"></script>
 <script src="js/alias.js"></script>
+<script src="js/lemming.js"></script>
 <script src="js/grid.js"></script>
 <script src="js/index.js"></script>
+
 </head>
 <body>
   <script>
@@ -23,6 +25,23 @@
       }
     });
 
+
+    g = new Grid(80, 48);
+
+
+    lemming = new Lemming();
+
+    Events.on(engine, 'collisionStart', function(event){
+      // Matter.Body.translate(lemming.shape, { x: 4, y: 0 });
+      if (lemming.shape.velocity.y > 0) {
+        Matter.Body.setVelocity(lemming.shape, { x: 2, y: 0 })
+      };
+
+
+    });
+
+
+
     layerNodes = 40;
     layers = 20;
     grid = new Grid(layerNodes, layers);
@@ -31,6 +50,7 @@
     grid.exitBlock(37, 1)
 
     run();
+
 
   </script>
 </body>
