@@ -4,52 +4,83 @@
     return Math.floor(Math.random() * max);
   }
 
+  function createBlock(x, y, size, style = {}, sensor = false ) {
+    block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
+    World.add(engine.world, [block]);
+    return block;
+  }
+
+  function grid2Pix(xGrid, yGrid, blockSize) {
+    halfBlock = blockSize / 2
+    return {
+      x: halfBlock + (xGrid * blockSize),
+      y: canvasSize.height - (halfBlock + (yGrid * blockSize))
+    }
+  }
+
   var Grid = function(nodes, layers) {
     this.xNodes = nodes;
     this.layers = layers
     this.blockSize = canvasSize.width / this.xNodes;
-    this.nodes = []
+    this.nodes = [];
+    this.spawn = null
+    this.exit = null
+
+    for (var i = 0; i < (this.layers * this.xNodes); i++) {
+      this.nodes.push(null);
+    }
   }
 
-  Grid.prototype.generate = function(){
-    y = canvasSize.height - (this.blockSize/2)
+  Grid.prototype.entranceBlock = function(x, y) {
+    var place = grid2Pix(x, y, this.blockSize)
+    var block = createBlock(place.x, place.y, this.blockSize, { fillStyle: "red"}, true )
+    this.setNode(x, y, block)
+    this.spawn = place
+  }
+
+  Grid.prototype.exitBlock = function(x, y) {
+    var place = grid2Pix(x, y, this.blockSize)
+    var block = createBlock(place.x, place.y, this.blockSize, { fillStyle: "green"}, true)
+    this.setNode(x, y, block)
+    this.exit = place
+  }
+
+  Grid.prototype.generateBucket = function (arguments) {
+    this.generateColumn(0);
+    this.generateColumn(this.xNodes - 1);
+    this.generateLine(0)
+  }
+
+  Grid.prototype.generateColumn = function (x) {
+    var place = grid2Pix(x, 0, this.blockSize);
     for (var i = 0; i < this.layers; i++) {
-      this.line(y)
-      y -= this.blockSize
-    }
-  }
-
-  Grid.prototype.cutOut = function (x, y, sizeX, sizeY) {
-
-    if(sizeX % 2 === 0) {sizeX += 1}
-    radX = (sizeX - 1)/2;
-
-    if(sizeY % 2 === 0) {sizeY += 1}
-    radY = (sizeY - 1)/2;
-
-    for (var j = (y - radY); j <= (y + radY); j++) {
-      for (var i = (x - radX); i <= (x + radX); i++) {
-        this.destroyNode(i, j);
+      if (this.getNode(x, this.layers - i) === null) {
+        var block = createBlock(place.x, place.y, this.blockSize);
+        this.setNode(x, this.layers - i, block)
       }
+      place.y -= this.blockSize
     }
   }
 
-  Grid.prototype.line = function() {
-    var halfBlockSize = this.blockSize / 2;
-    var startX = halfBlockSize;
+  Grid.prototype.generateLine = function (y) {
+    var place = grid2Pix(0, y, this.blockSize);
     for (var i = 0; i < this.xNodes; i++) {
-      block = Bodies.rectangle(startX, y, this.blockSize, this.blockSize, { isStatic: true });
+      var block = createBlock(place.x, place.y, this.blockSize);
       block.restitution = 0;
       block.friction = 0;
-      World.add(engine.world, [block]);
-      this.nodes.push(block);
-      startX += this.blockSize;
+      this.setNode(i, y, block)
+      place.x += this.blockSize
     }
   }
 
   Grid.prototype.getNode = function (x, y) {
-    index = (this.xNodes*y) + x;
+    var index = (this.xNodes*y) + x;
     return this.nodes[index];
+  }
+
+  Grid.prototype.setNode = function (x, y, value) {
+    var index = (this.xNodes*y) + x;
+    this.nodes[index] = value;
   }
 
   Grid.prototype.destroyNode = function (x, y) {
@@ -58,18 +89,18 @@
     }
   }
 
-  var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
-    grid = new Grid(xNodes, yNodes);
-    grid.generate();
-    for (var i = 0; i < 5; i++) {
-      x = randomRange(grid.xNodes);
-      y = randomRange(grid.layers);
-      xSize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-      ySize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-      grid.cutOut(x, y, xSize, ySize);
-    }
-    return grid;
-  }
+  // var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
+  //   grid = new Grid(xNodes, yNodes);
+  //   grid.generate();
+  //   for (var i = 0; i < 5; i++) {
+  //     x = randomRange(grid.xNodes);
+  //     y = randomRange(grid.layers);
+  //     xSize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
+  //     ySize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
+  //     grid.cutOut(x, y, xSize, ySize);
+  //   }
+  //   return grid;
+  // }
 
   exports.Grid = Grid;
   exports.randomGrid = randomGrid;
