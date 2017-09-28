@@ -60,6 +60,7 @@
     grid.generateBucket();
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
+    grid.generateLevel1();
     for (var i = 0; i < 10; i++) {
       setTimeout(function(){var lemming = new Lemming(grid.spawn)}, i * 1000)
     };

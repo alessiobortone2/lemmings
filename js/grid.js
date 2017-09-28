@@ -6,6 +6,8 @@
 
   function createBlock(x, y, size, style = {}, sensor = false ) {
     block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
+    block.restitution = 0;
+    block.friction = 0;
     World.add(engine.world, [block]);
     return block;
   }
@@ -51,6 +53,26 @@
     this.generateLine(0)
   }
 
+  Grid.prototype.generateLevel1 = function (arguments) {
+    this.generateColumn(0);
+    this.generateColumn(this.xNodes - 1);
+    this.generateLine(0);
+    var place = grid2Pix(1, 5, this.blockSize);
+    for (var i = 0; i < 15; i++) {
+      var block = createBlock(place.x, place.y, this.blockSize);
+      this.setNode(i, 5, block)
+      place.x += this.blockSize
+    };
+    var place2 = grid2Pix(15, 6, this.blockSize);
+    for (var i = 0; i < 5; i++) {
+      if (this.getNode(15, 5 - i) === null) {
+        var block = createBlock(place2.x, place2.y, this.blockSize);
+        this.setNode(15, 5 - i, block)
+      }
+      place2.y -= this.blockSize;
+    };
+  }
+
   Grid.prototype.generateColumn = function (x) {
     var place = grid2Pix(x, 0, this.blockSize);
     for (var i = 0; i < this.layers; i++) {
@@ -66,8 +88,6 @@
     var place = grid2Pix(0, y, this.blockSize);
     for (var i = 0; i < this.xNodes; i++) {
       var block = createBlock(place.x, place.y, this.blockSize);
-      block.restitution = 0;
-      block.friction = 0;
       this.setNode(i, y, block)
       place.x += this.blockSize
     }
