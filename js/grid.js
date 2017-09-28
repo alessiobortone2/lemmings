@@ -33,6 +33,16 @@
     this.generateLine(0)
   }
 
+  Grid.prototype.generateBlock = function (x, y, sizeX, sizeY) {
+    for (var j = 0; j < sizeY; j++) {
+      for (var i = 0; i < sizeX; i++) {
+        var place = grid2Pix(x + i, y + j, this.blockSize);
+        var block = createBlock(place.x, place.y, this.blockSize);
+        this.setNode(x + i, y + j, block)
+      }
+    }
+  }
+
   Grid.prototype.generateColumn = function (x) {
     var place = grid2Pix(x, 0, this.blockSize);
     for (var i = 0; i < this.layers; i++) {
