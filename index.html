@@ -26,36 +26,14 @@
       }
     });
 
-
-
-
-
-
-
-    //
-    // Events.on(engine, 'collisionActive', function(event){
-    //   if (lemming.shape.isStatic) {
-    //             Matter.Body.setVelocity(lemming.shape, { x: -1, y: 1 })
-    //             };
-    //           });
-
-
-      // Events.on(engine, 'collisionEnd', function(event){
-      //   // Matter.Body.translate(lemming.shape, { x: 4, y: 0 });
-      //   if (lemming.shape.velocity.x < 0) {
-      //     Matter.Body.translate(lemming.shape, { x: 1, y: 0 })
-      //   };
-      // });
-
-
-
     layerNodes = 40;
     layers = 20;
     grid = new Grid(layerNodes, layers);
-    grid.generateBucket();
+    
+    grid.generateLevel1();
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
-    grid.generateLevel1();
+
     var defaultCategory = 0x0001;
     var lemmingCategory = 0x0002;
     for (var i = 0; i < 2; i++) {
