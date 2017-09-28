@@ -45,7 +45,7 @@
     this.exit = place
   }
 
-  Grid.prototype.generateBucket = function (arguments) {
+  Grid.prototype.generateBucket = function () {
     this.generateColumn(0);
     this.generateColumn(this.xNodes - 1);
     this.generateLine(0)
@@ -89,20 +89,6 @@
     }
   }
 
-  // var randomGrid = function(xNodes, yNodes, cutOuts, minCutOutSize, maxCutOutSize){
-  //   grid = new Grid(xNodes, yNodes);
-  //   grid.generate();
-  //   for (var i = 0; i < 5; i++) {
-  //     x = randomRange(grid.xNodes);
-  //     y = randomRange(grid.layers);
-  //     xSize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-  //     ySize = randomRange(maxCutOutSize - minCutOutSize) + minCutOutSize;
-  //     grid.cutOut(x, y, xSize, ySize);
-  //   }
-  //   return grid;
-  // }
-
   exports.Grid = Grid;
-  exports.randomGrid = randomGrid;
 
 })(this);
