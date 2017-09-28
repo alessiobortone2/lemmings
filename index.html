@@ -14,6 +14,7 @@
 
     // create an engine
     var engine = Engine.create();
+    var exitArray = []
 
     // create a renderer
     var render = Render.create({
@@ -33,7 +34,7 @@
 
     grid.generateBucket();
     grid.generateBlock(0, 7, 15, 1)
-    grid.generateBlock(15, 7, 1, 10)
+    // grid.generateBlock(15, 7, 1, 10)
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
 
@@ -46,7 +47,8 @@
     };
 
     Events.on(engine, 'collisionStart', function(event){
-      console.log(event);
+      // console.log(event);
+
       for (var i = 0; i < event.pairs.length; i++) {
         var lemming = null;
         if (event.pairs[i].bodyA.label === "Circle Body"){
@@ -55,6 +57,14 @@
           lemming = event.pairs[i].bodyB;
         }
         if (lemming != null){
+
+          if (lemming.position.x >= grid.exit.x) {
+            exitArray.push(1)
+            console.log(exitArray)
+            World.remove(engine.world, [lemming])
+            return
+          }
+
           if (lemming.velocity.x >= 0) {
             Matter.Body.setVelocity(lemming, { x: 3, y: -1 })
           }
@@ -64,7 +74,6 @@
         };
       };
     });
-
     run();
   </script>
 </body>
