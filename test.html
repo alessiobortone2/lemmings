@@ -16,11 +16,12 @@
 <script src="js/lib/matter.js"></script>
 <script src="js/alias.js"></script>
 <script src="js/lemming.js"></script>
-<script src="js/world.js"></script>
+<script src="js/grid.js"></script>
 <script src="js/index.js"></script>
 
 
   <script src="test/test.js"></script>
+  <script src="test/gridTest.js"></script>
   <script>
   var engine = Engine.create();
 
@@ -34,13 +35,13 @@
     }
   });
 
-  lemming = new Lemming();
+  // lemming = new Lemming();
 
   g = new Grid(80, 48);
   run();
   </script>
   <script>
-    mocha.checkLeaks();
+    // mocha.checkLeaks();
     mocha.globals(['jQuery']);
     mocha.run();
   </script>
