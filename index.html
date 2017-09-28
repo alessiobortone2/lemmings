@@ -38,14 +38,14 @@
 
 
     grid.generateBucket();
-    grid.generateBlock(0, 7, 15, 1)
-    // grid.generateBlock(15, 7, 1, 10)
+    grid.generateBlock(3, 7, 15, 1)
+    grid.generateBlock(17, 7, 1, 10)
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
 
     var defaultCategory = 0x0001;
     var lemmingCategory = 0x0002;
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 1000; i++) {
       setTimeout(function(){
         new Lemming(grid.spawn);
       }, i * 1000);
