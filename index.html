@@ -29,9 +29,11 @@
     layerNodes = 40;
     layers = 20;
     grid = new Grid(layerNodes, layers);
-    
-    //grid.generateLevel1();
 
+
+    grid.generateBucket();
+    grid.generateBlock(0, 7, 15, 1)
+    grid.generateBlock(15, 7, 1, 10)
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
 
@@ -62,7 +64,7 @@
         };
       };
     });
-    
+
     run();
   </script>
 </body>
