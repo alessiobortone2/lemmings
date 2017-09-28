@@ -5,7 +5,9 @@
   }
 
   function createBlock(x, y, size, style = {}, sensor = false ) {
+
     block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
+
     block.restitution = 0;
     block.friction = 0;
     World.add(engine.world, [block]);
