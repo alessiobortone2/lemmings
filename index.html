@@ -58,7 +58,7 @@
     grid.generateLevel1();
     var defaultCategory = 0x0001;
     var lemmingCategory = 0x0002;
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 5; i++) {
       setTimeout(function(){
         new Lemming(grid.spawn);
       }, i * 1000);
@@ -83,6 +83,8 @@
         };
       };
     });
+
+    
 
     run();
 
