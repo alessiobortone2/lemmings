@@ -1,23 +1,5 @@
 (function(exports){
 
-  function randomRange(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  function createBlock(x, y, size, style = {}, sensor = false ) {
-    block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
-    World.add(engine.world, [block]);
-    return block;
-  }
-
-  function grid2Pix(xGrid, yGrid, blockSize) {
-    halfBlock = blockSize / 2
-    return {
-      x: halfBlock + (xGrid * blockSize),
-      y: canvasSize.height - (halfBlock + (yGrid * blockSize))
-    }
-  }
-
   var Grid = function(nodes, layers) {
     this.xNodes = nodes;
     this.layers = layers
@@ -86,6 +68,24 @@
   Grid.prototype.destroyNode = function (x, y) {
     if (x > 0 && x < this.xNodes-1 && y > 0 && y < this.layers) {
       World.remove(engine.world, [this.getNode(x,y)], true);
+    }
+  }
+
+  function randomRange(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function createBlock(x, y, size, style = {}, sensor = false ) {
+    block = Bodies.rectangle(x, y, size, size, { isStatic: true, render: style, isSensor: sensor });
+    World.add(engine.world, [block]);
+    return block;
+  }
+
+  function grid2Pix(xGrid, yGrid, blockSize) {
+    halfBlock = blockSize / 2
+    return {
+      x: halfBlock + (xGrid * blockSize),
+      y: canvasSize.height - (halfBlock + (yGrid * blockSize))
     }
   }
 
