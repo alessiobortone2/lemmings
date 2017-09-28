@@ -26,13 +26,12 @@
     });
 
     Events.on(engine, 'collisionStart', function(event){
-      // Matter.Body.translate(lemming.shape, { x: 4, y: 0 });
-      if (event.pair
-        .source.shape.velocity.y > 0) {
-        Matter.Body.setVelocity(event.source.shape, { x: 2, y: 0 })
+      if (lemming.shape.velocity.x >= 0) {
+        Matter.Body.setVelocity(lemming.shape, { x: 2, y: -0.5 })
       };
-    });
-
+      if (lemming.shape.velocity.x < 0) {
+        Matter.Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
+      };    });
 
 
     var layerNodes = 40;
@@ -41,7 +40,11 @@
 
     grid.generateBucket();
     grid.entranceBlock(2, 10);
-    grid.exitBlock(37, 1)
+    grid.exitBlock(37, 1);
+    for (var i = 0; i < 10; i++) {
+      setTimeout(function(){var lemming = new Lemming(grid.spawn)}, i * 1000)
+
+    };
 
     for (var i = 0; i < 10; i++) {
       setTimeout(function() {

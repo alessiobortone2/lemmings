@@ -11,4 +11,5 @@
   exports.Mouse = Matter.Mouse;
   exports.Renderer = Matter.Renderer;
   exports.Render = Matter.Render;
+  exports.Common = Matter.Common;
 })(this);
