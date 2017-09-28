@@ -1,4 +1,5 @@
 <head>
+  <link href = "css/index.css" rel = "stylesheet" type = "text/css">
 <title>Matter.js Basics Tutorial</title>
 <meta name="author" content="John Day">
 <script src="js/lib/matter.js"></script>
@@ -8,8 +9,12 @@
 
 <script src="js/index.js"></script>
 
+
 </head>
 <body>
+
+  <div id="score">0</div>
+
   <script>
 
     // create an engine
@@ -62,6 +67,7 @@
             exitArray.push(1)
             console.log(exitArray)
             World.remove(engine.world, [lemming])
+            document.getElementById("score").innerHTML = exitArray.length
             return
           }
 
