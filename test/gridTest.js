@@ -48,6 +48,7 @@ describe ('Grid', function () {
     });
 
     it ('sets grid.spawn', function () {
+      grid.entranceBlock(3, 3);
       assert.notEqual(grid.spawn, null);
     });
   });
@@ -72,6 +73,7 @@ describe ('Grid', function () {
     });
 
     it ('sets grid.exit', function () {
+      grid.exitBlock(3, 3);
       assert.notEqual(grid.exit, null);
     });
   });
@@ -132,7 +134,7 @@ describe ('Grid', function () {
     });
 
     it ('adds all blocks to array', function () {
-      expected = true;
+      var expected = true;
       for (var i = 0; i < nodes; i++) {
         if (grid.nodes[i] !== "block") { expected = false; }
       }
@@ -183,12 +185,12 @@ describe ('Grid', function () {
       }
     });
 
-    xit ('destroys correct node (providing they are not protected)', function () {
+    it ('destroys correct node (providing they are not protected)', function () {
       grid.destroyNode(2, 2);
       assert.equal(grid.getNode(2, 2), null);
     });
 
-    xit ('does not destroy protected nodes', function () {
+    it ('does not destroy protected nodes', function () {
       grid.destroyNode(0, 0);
       assert.notEqual(grid.getNode(0, 0), null);
     });
