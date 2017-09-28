@@ -26,10 +26,9 @@
     });
 
 
-    g = new Grid(80, 48);
 
 
-    lemming = new Lemming();
+
 
     Events.on(engine, 'collisionStart', function(event){
       if (lemming.shape.velocity.x >= 0) {
@@ -60,7 +59,10 @@
     grid = new Grid(layerNodes, layers);
     grid.generateBucket();
     grid.entranceBlock(2, 10);
-    grid.exitBlock(37, 1)
+    grid.exitBlock(37, 1);
+    for (var i = 0; i < 10; i++) {
+      setTimeout(function(){var lemming = new Lemming(grid.spawn)}, i * 1000)
+    };
 
     run();
 
