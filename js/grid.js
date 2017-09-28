@@ -28,10 +28,6 @@
   }
 
   Grid.prototype.generateBucket = function () {
-    // this.generateColumn(0);
-    // this.generateColumn(this.xNodes - 1);
-    // this.generateLine(0)
-
     this.generateBlock(0, 0, this.xNodes, 1)
     this.generateBlock(0, 0, 1, this.layers)
     this.generateBlock(this.xNodes-1, 0, 1, this.layers)
@@ -46,28 +42,6 @@
       }
     }
   }
-
-  // Grid.prototype.generateColumn = function (x) {
-  //   var place = grid2Pix(x, 0, this.blockSize);
-  //   for (var i = 0; i < this.layers; i++) {
-  //     if (this.getNode(x, this.layers - i) === null) {
-  //       var block = createBlock(place.x, place.y, this.blockSize);
-  //       this.setNode(x, this.layers - i, block)
-  //     }
-  //     place.y -= this.blockSize
-  //   }
-  // }
-  //
-  // Grid.prototype.generateLine = function (y) {
-  //   var place = grid2Pix(0, y, this.blockSize);
-  //   for (var i = 0; i < this.xNodes; i++) {
-  //     var block = createBlock(place.x, place.y, this.blockSize);
-  //     block.restitution = 0;
-  //     block.friction = 0;
-  //     this.setNode(i, y, block)
-  //     place.x += this.blockSize
-  //   }
-  // }
 
   Grid.prototype.getNode = function (x, y) {
     var index = (this.xNodes*y) + x;
