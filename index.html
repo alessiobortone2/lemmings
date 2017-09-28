@@ -3,8 +3,9 @@
 <meta name="author" content="John Day">
 <script src="js/lib/matter.js"></script>
 <script src="js/alias.js"></script>
-<script src="js/lemming.js"></script>
 <script src="js/grid.js"></script>
+<script src="js/lemming.js"></script>
+
 <script src="js/index.js"></script>
 
 </head>
@@ -25,33 +26,43 @@
       }
     });
 
-    Events.on(engine, 'collisionStart', function(event){
-      if (lemming.shape.velocity.x >= 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: 2, y: -0.5 })
-      };
-      if (lemming.shape.velocity.x < 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
-      };    });
+    layerNodes = 40;
+    layers = 20;
+    grid = new Grid(layerNodes, layers);
+    
+    //grid.generateLevel1();
 
-
-    var layerNodes = 40;
-    var layers = 20;
-    var grid = new Grid(layerNodes, layers);
-
-    grid.generateBucket();
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
-    for (var i = 0; i < 10; i++) {
-      setTimeout(function(){var lemming = new Lemming(grid.spawn)}, i * 1000)
 
+    var defaultCategory = 0x0001;
+    var lemmingCategory = 0x0002;
+    for (var i = 0; i < 5; i++) {
+      setTimeout(function(){
+        new Lemming(grid.spawn);
+      }, i * 1000);
     };
 
-    for (var i = 0; i < 10; i++) {
-      setTimeout(function() {
-        var lemming = new Lemming(grid.spawn);
-      }, i*1000);
-    }
-
+    Events.on(engine, 'collisionStart', function(event){
+      console.log(event);
+      for (var i = 0; i < event.pairs.length; i++) {
+        var lemming = null;
+        if (event.pairs[i].bodyA.label === "Circle Body"){
+          lemming = event.pairs[i].bodyA;
+        } else if (event.pairs[i].bodyB.label === "Circle Body"){
+          lemming = event.pairs[i].bodyB;
+        }
+        if (lemming != null){
+          if (lemming.velocity.x >= 0) {
+            Matter.Body.setVelocity(lemming, { x: 3, y: -1 })
+          }
+          else if (lemming.velocity.x < 0) {
+            Matter.Body.setVelocity(lemming, { x: -3, y: -1})
+          };
+        };
+      };
+    });
+    
     run();
   </script>
 </body>
