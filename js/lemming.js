@@ -8,7 +8,6 @@ var Lemming = function(spawn){
   this.state = "intheair";
   this.shape.restitution = 0;
   this.shape.friction = 0;
-  console.log(this.shape);
   World.add(engine.world, [this.shape]);
 };
 // module.exports = Lemming;

@@ -33,9 +33,11 @@
         Matter.Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
       };    });
 
-    layerNodes = 40;
-    layers = 20;
-    grid = new Grid(layerNodes, layers);
+
+    var layerNodes = 40;
+    var layers = 20;
+    var grid = new Grid(layerNodes, layers);
+
     grid.generateBucket();
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
@@ -44,9 +46,13 @@
 
     };
 
+    for (var i = 0; i < 10; i++) {
+      setTimeout(function() {
+        var lemming = new Lemming(grid.spawn);
+      }, i*1000);
+    }
+
     run();
-
-
   </script>
 </body>
 </html>
