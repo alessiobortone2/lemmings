@@ -55,18 +55,37 @@
     grid.entranceBlock(2, 10);
     grid.exitBlock(37, 1);
     grid.generateLevel1();
-    // for (var i = 0; i < 10; i++) {
-      // setTimeout(function(){var lemming = new Lemming(grid.spawn)}, i * 1000)
-    // };
-    var lemming = new Lemming(grid.spawn);
+    // lemmings = [];
+    for (var i = 0; i < 2; i++) {
+      setTimeout(function(){
+        new Lemming(grid.spawn);
+        // console.log(lemming.shape.id);
+        // lemmings.push(lemming);
+        // console.log(lemmings);
+      }, i * 1000);
+    };
+
+
+    // var lemming = new Lemming(grid.spawn);
+    //
 
     Events.on(engine, 'collisionStart', function(event){
-      if (lemming.shape.velocity.x >= 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: 5, y: -0.5 })
+      console.log(event);
+      var lemming = null;
+      if (event.pairs["0"].bodyA.label === "Circle Body"){
+        lemming = event.pairs["0"].bodyA;
+      } else if (event.pairs["0"].bodyB.label === "Circle Body"){
+        lemming = event.pairs["0"].bodyB;
+      }
+      if (lemming != null){
+        if (lemming.velocity.x >= 0) {
+          Matter.Body.setVelocity(lemming, { x: 5, y: -0.5 })
+        }
+        else if (lemming.velocity.x < 0) {
+          Matter.Body.setVelocity(lemming, { x: -5, y: -0.5})
+        };
       };
-      if (lemming.shape.velocity.x < 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: -5, y: -0.5})
-      };    });
+    });
 
     run();
 
