@@ -81,26 +81,36 @@ describe ('Grid', function () {
   describe ('#generateBucket', function (){
 
     beforeEach(function () {
+      added = 0;
+      World.add = function(){ added++; }
+      Bodies.rectangle = function(){return "block"}
 
+      nodes = 5;
+      layers = 8;
+      grid = new Grid(nodes, layers);
+      grid.generateBucket()
     });
 
-    xit ('creates correct number of nodes', function () {
-    });
-
-    xit ('adds all blocks to array', function () {
+    it ('creates correct number of nodes', function () {
+      assert.equal(added, (layers * 2) + (nodes - 2));
     });
   });
 
   describe ('#generateBlock', function (){
 
     beforeEach(function () {
+      added = 0;
+      World.add = function(){ added++; }
+      Bodies.rectangle = function(){return "block"}
 
+      nodes = 5;
+      layers = 8;
+      grid = new Grid(nodes, layers);
+      grid.generateBlock(2, 2, 2, 2)
     });
 
-    xit ('creates correct number of nodes', function () {
-    });
-
-    xit ('is in correct location', function () {
+    it ('creates correct number of nodes', function () {
+      assert.equal(added, 4);
     });
   });
 
@@ -111,9 +121,6 @@ describe ('Grid', function () {
     });
 
     xit ('creates correct number of nodes', function () {
-    });
-
-    xit ('adds all blocks to array', function () {
     });
   });
 
@@ -130,7 +137,7 @@ describe ('Grid', function () {
     });
 
     it ('creates correct number of nodes', function () {
-      assert.equal(added, 10);
+      assert.equal(added, nodes);
     });
 
     it ('adds all blocks to array', function () {
