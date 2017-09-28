@@ -78,6 +78,7 @@
   Grid.prototype.destroyNode = function (x, y) {
     if (x > 0 && x < this.xNodes-1 && y > 0 && y < this.layers) {
       World.remove(engine.world, [this.getNode(x,y)], true);
+      this.setNode(x, y, null)
     }
   }
 

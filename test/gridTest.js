@@ -31,32 +31,48 @@ describe ('Grid', function () {
   describe ('#entranceBlock', function (){
 
     beforeEach(function () {
-
+      nodes = 5;
+      layers = 8;
+      grid = new Grid(nodes, layers);
     });
 
-    xit ('places in correct location', function () {
+    it ('places in correct location', function () {
+      grid.entranceBlock(3, 3);
+      assert.notEqual(grid.getNode(3, 3), null);
     });
 
-    xit ('non-collidable', function () {
+    it ('non-collidable', function () {
+      grid.entranceBlock(3, 3);
+      var node = grid.getNode(3, 3)
+      assert.equal(node.isSensor, true);
     });
 
-    xit ('sets grid.spawn', function () {
+    it ('sets grid.spawn', function () {
+      assert.notEqual(grid.spawn, null);
     });
   });
 
   describe ('#exitBlock', function (){
 
     beforeEach(function () {
-
+      nodes = 5;
+      layers = 8;
+      grid = new Grid(nodes, layers);
     });
 
-    xit ('places in correct location', function () {
+    it ('places in correct location', function () {
+      grid.exitBlock(3, 3);
+      assert.notEqual(grid.getNode(3, 3), null);
     });
 
-    xit ('non-collidable', function () {
+    it ('non-collidable', function () {
+      grid.exitBlock(3, 3);
+      var node = grid.getNode(3, 3)
+      assert.equal(node.isSensor, true);
     });
 
-    xit ('sets grid.exit', function () {
+    it ('sets grid.exit', function () {
+      assert.notEqual(grid.exit, null);
     });
   });
 
@@ -70,6 +86,19 @@ describe ('Grid', function () {
     });
 
     xit ('adds all blocks to array', function () {
+    });
+  });
+
+  describe ('#generateBlock', function (){
+
+    beforeEach(function () {
+
+    });
+
+    xit ('creates correct number of nodes', function () {
+    });
+
+    xit ('is in correct location', function () {
     });
   });
 
@@ -131,10 +160,14 @@ describe ('Grid', function () {
   describe ('#setNode', function (){
 
     beforeEach(function () {
-
+      nodes = 5;
+      layers = 5;
+      grid = new Grid(nodes, layers);
     });
 
-    xit ('', function () {
+    it ('sets the correct node', function () {
+      grid.setNode(2, 2, "node")
+      assert.equal(grid.getNode(2, 2), "node");
     });
   });
 
@@ -144,15 +177,20 @@ describe ('Grid', function () {
       nodes = 5;
       layers = 5;
       grid = new Grid(nodes, layers);
-      grid.generate();
+
+      for (var i = 0; i < grid.nodes.length; i++) {
+        grid.nodes[i] = i;
+      }
     });
 
     xit ('destroys correct node (providing they are not protected)', function () {
-
+      grid.destroyNode(2, 2);
+      assert.equal(grid.getNode(2, 2), null);
     });
 
     xit ('does not destroy protected nodes', function () {
-
+      grid.destroyNode(0, 0);
+      assert.notEqual(grid.getNode(0, 0), null);
     });
   });
 });
