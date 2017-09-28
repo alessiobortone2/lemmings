@@ -11,8 +11,6 @@
 </head>
 <body>
 
-
-
   <script>
 
   var Engine = Matter.Engine,
@@ -29,6 +27,9 @@
   Render = Matter.Render,
   Common = Matter.Common;
 
+  function setup() {
+    createCanvas(640, 480);
+  }
 
     // create an engine
     var engine = Engine.create();
@@ -45,28 +46,34 @@
     });
 
 
-    var canvasMouse = Mouse.create(canvas.elt);
+    var mouse = Mouse.create(render.canvas);
 
     var mouseConstraint = MouseConstraint.create(engine, {mouse: mouse, constraint: {stiffness: 0.2}});
     var mouseIsDown = false;
-    var mp;
+
 
     World.add(engine.world, [mouseConstraint]);
 
-    Events.on(mouseConstraint, 'mousedown', function(event) {
+    Events.on(engine, 'mousedown', function(event) {
     var mousePosition = event.mouse.position;
-    mp = mousePosition;
     mouseIsDown = true;
-    console.log(mp)
+    console.log(mousePosition)
     });
 
+    // Events.on(engine, 'mousedown', function(event) {
+    //   var mousePosition = event.mouse.position;
+    //     lemming.shape.force = {
+    //       x: 0.001,
+    //       y: -0.01
+    //       };
+    //     });
 
     Events.on(engine, 'collisionStart', function(event){
       if (lemming.shape.velocity.x >= 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: 2, y: -0.5 })
+        Body.setVelocity(lemming.shape, { x: 2, y: -0.5 })
       };
       if (lemming.shape.velocity.x < 0) {
-        Matter.Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
+        Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
       };    });
 
     layerNodes = 40;
