@@ -76,6 +76,13 @@
       y: canvasSize.height - (halfBlock + (yGrid * blockSize))
     }
   }
+  
+  Grid.prototype.pix2Grid = function(xPix, yPix, blockSize) {
+    return {
+      x: (xPix / blockSize) - (xPix % 1),
+      y: (canvasSize.height - yPix) / blockSize) - (yPix % 1)
+    }
+  }
 
   exports.Grid = Grid;
 
