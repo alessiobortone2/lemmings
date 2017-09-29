@@ -7,23 +7,23 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
-    it ('assigns node count (.xNodes)', function () {
-      assert.equal(grid.xNodes, nodes);
+    it ('assigns node count (.columns)', function () {
+      assert.equal(grid.columns, nodes);
     });
 
     it ('assigns layer count (.layers)', function () {
-      assert.equal(grid.layers, layers);
+      assert.equal(grid.rows, layers);
     });
 
-    it ('assigns dynamic canvas size (width / xNodes)', function () {
+    it ('assigns dynamic canvas size (width / columns)', function () {
       assert.equal(grid.blockSize, canvasSize.width / nodes);
     });
 
-    it ('generates correct number of nodes (xNodes * layers)', function () {
-      assert.equal(grid.nodes.length, nodes*layers);
+    it ('generates correct number of nodes (columns * layers)', function () {
+      assert.equal(grid.nodeArray.length, nodes*layers);
     });
 
   });
@@ -33,7 +33,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('places in correct location', function () {
@@ -58,7 +58,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('places in correct location', function () {
@@ -87,7 +87,7 @@ describe ('Grid', function () {
 
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
       grid.generateBucket()
     });
 
@@ -105,7 +105,7 @@ describe ('Grid', function () {
 
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
       grid.generateBlock(2, 2, 2, 2)
     });
 
@@ -114,50 +114,15 @@ describe ('Grid', function () {
     });
   });
 
-  describe ('#generateColumn', function (){
-
-    beforeEach(function () {
-
-    });
-
-    xit ('creates correct number of nodes', function () {
-    });
-  });
-
-  describe ('#generateLine', function (){
-
-    beforeEach(function () {
-      added = 0;
-      World.add = function(){ added++; }
-      Bodies.rectangle = function(){return "block"}
-      nodes = 10;
-      layers = 10;
-      grid = new Grid(nodes, layers);
-      grid.generateLine(0);
-    });
-
-    it ('creates correct number of nodes', function () {
-      assert.equal(added, nodes);
-    });
-
-    it ('adds all blocks to array', function () {
-      var expected = true;
-      for (var i = 0; i < nodes; i++) {
-        if (grid.nodes[i] !== "block") { expected = false; }
-      }
-      assert.equal(expected, true);
-    });
-  });
-
   describe ('#getNode', function (){
 
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
 
-      for (var i = 0; i < grid.nodes.length; i++) {
-        grid.nodes[i] = i;
+      for (var i = 0; i < grid.nodeArray.length; i++) {
+        grid.nodeArray[i] = i;
       }
     });
 
@@ -171,7 +136,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('sets the correct node', function () {
@@ -185,10 +150,10 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
 
-      for (var i = 0; i < grid.nodes.length; i++) {
-        grid.nodes[i] = i;
+      for (var i = 0; i < grid.nodeArray.length; i++) {
+        grid.nodeArray[i] = i;
       }
     });
 
