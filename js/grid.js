@@ -36,9 +36,11 @@
   Grid.prototype.generateBlock = function (x, y, sizeX, sizeY) {
     for (var j = 0; j < sizeY; j++) {
       for (var i = 0; i < sizeX; i++) {
-        var place = grid2Pix(x + i, y + j, this.blockSize);
-        var block = generateGridNode(place.x, place.y, this.blockSize);
-        this.setNode(x + i, y + j, block)
+        if (this.getNode(x+i, y+j) === null) {
+          var place = grid2Pix(x + i, y + j, this.blockSize);
+          var block = generateGridNode(place.x, place.y, this.blockSize);
+          this.setNode(x + i, y + j, block)  
+        }
       }
     }
   }
