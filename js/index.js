@@ -5,12 +5,4 @@ var viewSize = function(){
   return {width: width, height: height}
 }
 
-var run = function(){
-  // run the engine
-  Engine.run(engine);
-
-  // run the renderer
-  Render.run(render);
-}
-
 var canvasSize = viewSize()

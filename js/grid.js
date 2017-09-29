@@ -39,7 +39,7 @@
         if (this.getNode(x+i, y+j) === null) {
           var place = grid2Pix(x + i, y + j, this.blockSize);
           var block = generateGridNode(place.x, place.y, this.blockSize);
-          this.setNode(x + i, y + j, block)  
+          this.setNode(x + i, y + j, block)
         }
       }
     }
