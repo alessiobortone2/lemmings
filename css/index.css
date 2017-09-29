@@ -2,9 +2,14 @@
   width: 200px;
   height: 100px;
   position: absolute;
-  left: 50px;
-  top: 50px;
+  left: 500px;
+  top: 0px;
   font-size: 500%;
   text-align: center;
 
 }
+
+architecture
+  - code uses module pattern
+  - engine communicates with game logic via callbacks
+  - rendering objects on a grid using pixel2grid conversions
