@@ -5,12 +5,11 @@ var viewSize = function(){
   return {width: width, height: height}
 }
 
-var run = function(){
-  // run the engine
-  Engine.run(engine);
-
-  // run the renderer
-  Render.run(render);
-}
-
 var canvasSize = viewSize()
+
+var physics = new Physics();
+var game = new Game(physics);
+game.generateLevel(0);
+game.generateLemmings()
+physics.addGrid(game.grid);
+physics.start();

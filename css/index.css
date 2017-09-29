@@ -1,11 +1,9 @@
 #score {
   width: 200px;
   height: 100px;
-  background: white;
   position: absolute;
   left: 50px;
   top: 50px;
   font-size: 500%;
   text-align: center;
-
 }

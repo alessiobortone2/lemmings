@@ -114,41 +114,6 @@ describe ('Grid', function () {
     });
   });
 
-  describe ('#generateColumn', function (){
-
-    beforeEach(function () {
-
-    });
-
-    xit ('creates correct number of nodes', function () {
-    });
-  });
-
-  describe ('#generateLine', function (){
-
-    beforeEach(function () {
-      added = 0;
-      World.add = function(){ added++; }
-      Bodies.rectangle = function(){return "block"}
-      nodes = 10;
-      layers = 10;
-      grid = new Grid(nodes, layers);
-      grid.generateLine(0);
-    });
-
-    it ('creates correct number of nodes', function () {
-      assert.equal(added, nodes);
-    });
-
-    it ('adds all blocks to array', function () {
-      var expected = true;
-      for (var i = 0; i < nodes; i++) {
-        if (grid.nodes[i] !== "block") { expected = false; }
-      }
-      assert.equal(expected, true);
-    });
-  });
-
   describe ('#getNode', function (){
 
     beforeEach(function () {
