@@ -3,7 +3,7 @@
   var Grid = function(engine, columns, rows) {
     this.engine = engine;
     this.columns = columns;
-    this.rows = rows
+    this.rows = rows;
     this.blockSize = canvasSize.width / this.columns;
     this.nodeArray = [];
     this.spawn = null

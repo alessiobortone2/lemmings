@@ -7,7 +7,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('assigns node count (.columns)', function () {
@@ -33,7 +33,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('places in correct location', function () {
@@ -58,7 +58,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('places in correct location', function () {
@@ -87,7 +87,7 @@ describe ('Grid', function () {
 
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
       grid.generateBucket()
     });
 
@@ -105,7 +105,7 @@ describe ('Grid', function () {
 
       nodes = 5;
       layers = 8;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
       grid.generateBlock(2, 2, 2, 2)
     });
 
@@ -119,7 +119,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
 
       for (var i = 0; i < grid.nodeArray.length; i++) {
         grid.nodeArray[i] = i;
@@ -136,7 +136,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
     });
 
     it ('sets the correct node', function () {
@@ -150,7 +150,7 @@ describe ('Grid', function () {
     beforeEach(function () {
       nodes = 5;
       layers = 5;
-      grid = new Grid(nodes, layers);
+      grid = new Grid(engine, nodes, layers);
 
       for (var i = 0; i < grid.nodeArray.length; i++) {
         grid.nodeArray[i] = i;
