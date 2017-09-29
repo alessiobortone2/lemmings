@@ -80,7 +80,7 @@
   Grid.prototype.pix2Grid = function(xPix, yPix) {
     return {
       x: (xPix / this.blockSize) - (xPix % 1),
-      y: (canvasSize.height - yPix) / this.blockSize) - (yPix % 1)
+      y: ((canvasSize.height - yPix) / this.blockSize) - (yPix % 1)
     }
   }
 
