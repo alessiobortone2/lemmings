@@ -1,11 +1,24 @@
 (function(exports){
   var Physics = function() {
+    this.exitArray = [];
+
+    this.engine = Engine.create();
+    this.render = Render.create({
+        element: document.body,
+        engine: this.engine,
+        options: {
+          width: canvasSize.width,
+          height: canvasSize.height,
+          wireframes: false
+      }
+    });
   }
 
-  Physics.prototype.setCollisionLogic = function() {
+  Physics.prototype.setCollisionLogic = function(grid) {
 
-    Events.on(engine, 'collisionStart', function(event){
-      // console.log(event);
+    thisEngine = this.engine;
+    thisExit = this.exitArray;
+    Events.on(thisEngine, 'collisionStart', function(event){
 
       for (var i = 0; i < event.pairs.length; i++) {
         var lemming = null;
@@ -17,10 +30,9 @@
         if (lemming != null){
 
           if (lemming.position.x >= grid.exit.x) {
-            exitArray.push(1)
-            console.log(exitArray)
-            World.remove(engine.world, [lemming])
-            document.getElementById("score").innerHTML = exitArray.length
+            thisExit.push(1)
+            World.remove(thisEngine.world, [lemming])
+            document.getElementById("score").innerHTML = thisExit.length
             return
           }
 
@@ -36,11 +48,9 @@
   };
 
   Physics.prototype.runEngineAndRender = function () {
-    Engine.run(engine);
-    Render.run(render);
+    Engine.run(this.engine);
+    Render.run(this.render);
   };
-
-
 
   exports.Physics = Physics;
 

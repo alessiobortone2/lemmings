@@ -6,8 +6,10 @@
 <script src="js/alias.js"></script>
 <script src="js/grid.js"></script>
 <script src="js/lemming.js"></script>
+
+<script src="js/levels.js"></script>
+<script src="js/game.js"></script>
 <script src="js/physics.js"></script>
-<script src="js/index.js"></script>
 
 
 </head>
@@ -15,41 +17,7 @@
 
   <div id="score">0</div>
 
-  <script>
-    var physics = new Physics();
-    var exitArray = [];
-    var engine = Engine.create();
-    var render = Render.create({
-        element: document.body,
-        engine: engine,
-        options: {
-          width: canvasSize.width,
-          height: canvasSize.height,
-          wireframes: false
-      }
-    });
-    layerNodes = 40;
-    layers = 20;
-    grid = new Grid(layerNodes, layers);
+  <script src="js/index.js"></script>
 
-
-    grid.generateBucket();
-    grid.generateBlock(3, 7, 15, 1)
-    grid.generateBlock(17, 7, 1, 10)
-    grid.entranceBlock(2, 10);
-    grid.exitBlock(37, 1);
-
-    var defaultCategory = 0x0001;
-    var lemmingCategory = 0x0002;
-    for (var i = 0; i < 1000; i++) {
-      setTimeout(function(){
-        new Lemming(grid.spawn);
-      }, i * 1000);
-    };
-
-    physics.setCollisionLogic();
-    physics.runEngineAndRender();
-
-  </script>
 </body>
 </html>
