@@ -70,7 +70,7 @@
   }
 
   Grid.prototype.grid2Pix = function(xGrid, yGrid) {
-    halfBlock = blockSize / 2
+    halfBlock = this.blockSize / 2
     return {
       x: halfBlock + (xGrid * this.blockSize),
       y: canvasSize.height - (halfBlock + (yGrid * this.blockSize))
