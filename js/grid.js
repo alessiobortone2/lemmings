@@ -14,14 +14,14 @@
   }
 
   Grid.prototype.entranceBlock = function(x, y) {
-    var place = grid2Pix(x, y, this.blockSize)
+    var place = this.grid2Pix(x, y, this.blockSize)
     var block = generateGridNode(this.engine, place.x, place.y, this.blockSize, { fillStyle: "red"}, true )
     this.setNode(x, y, block)
     this.spawn = place
   }
 
   Grid.prototype.exitBlock = function(x, y) {
-    var place = grid2Pix(x, y, this.blockSize)
+    var place = this.grid2Pix(x, y, this.blockSize)
     var block = generateGridNode(this.engine, place.x, place.y, this.blockSize, { fillStyle: "green"}, true)
     this.setNode(x, y, block)
     this.exit = place
@@ -37,7 +37,7 @@
     for (var j = 0; j < sizeY; j++) {
       for (var i = 0; i < sizeX; i++) {
         if (this.getNode(x+i, y+j) === null) {
-          var place = grid2Pix(x + i, y + j, this.blockSize);
+          var place = this.grid2Pix(x + i, y + j, this.blockSize);
           var block = generateGridNode(this.engine, place.x, place.y, this.blockSize);
           this.setNode(x + i, y + j, block)
         }
@@ -69,18 +69,18 @@
     return block;
   }
 
-  function grid2Pix(xGrid, yGrid, blockSize) {
+  Grid.prototype.grid2Pix = function(xGrid, yGrid) {
     halfBlock = blockSize / 2
     return {
-      x: halfBlock + (xGrid * blockSize),
-      y: canvasSize.height - (halfBlock + (yGrid * blockSize))
+      x: halfBlock + (xGrid * this.blockSize),
+      y: canvasSize.height - (halfBlock + (yGrid * this.blockSize))
     }
   }
-  
-  Grid.prototype.pix2Grid = function(xPix, yPix, blockSize) {
+
+  Grid.prototype.pix2Grid = function(xPix, yPix) {
     return {
-      x: (xPix / blockSize) - (xPix % 1),
-      y: (canvasSize.height - yPix) / blockSize) - (yPix % 1)
+      x: (xPix / this.blockSize) - (xPix % 1),
+      y: (canvasSize.height - yPix) / this.blockSize) - (yPix % 1)
     }
   }
 
