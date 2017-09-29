@@ -3,12 +3,8 @@
 <title>Matter.js Basics Tutorial</title>
 <meta name="author" content="John Day">
 <script src="js/lib/matter.js"></script>
-<<<<<<< HEAD
-<!-- <script src="js/alias.js"></script> -->
 <script src="js/lemming.js"></script>
-=======
 <script src="js/alias.js"></script>
->>>>>>> master
 <script src="js/grid.js"></script>
 <script src="js/lemming.js"></script>
 
@@ -22,20 +18,6 @@
   <div id="score">0</div>
 
   <script>
-
-  var Engine = Matter.Engine,
-  World = Matter.World,
-  Bodies = Matter.Bodies,
-  Body = Matter.Body
-  Constraint = Matter.Constraint,
-  Composites = Matter.Composites,
-  Events = Matter.Events,
-  MouseConstraint = Matter.MouseConstraint,
-  Composite = Matter.Composite,
-  Mouse = Matter.Mouse,
-  Renderer = Matter.Renderer,
-  Render = Matter.Render,
-  Common = Matter.Common;
 
   function setup() {
     createCanvas(640, 480);
@@ -79,14 +61,6 @@
     //       };
     //     });
 
-    Events.on(engine, 'collisionStart', function(event){
-      if (lemming.shape.velocity.x >= 0) {
-        Body.setVelocity(lemming.shape, { x: 3, y: -1 })
-      };
-      if (lemming.shape.velocity.x < 0) {
-        Body.setVelocity(lemming.shape, { x: -3, y: -1})
-      };    });
-
     layerNodes = 40;
     layers = 20;
     grid = new Grid(layerNodes, layers);
@@ -107,7 +81,6 @@
     };
 
     Events.on(engine, 'collisionStart', function(event){
-      // console.log(event);
 
       for (var i = 0; i < event.pairs.length; i++) {
         var lemming = null;
