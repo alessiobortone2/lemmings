@@ -4,12 +4,12 @@
     this.columns = columns;
     this.rows = rows
     this.blockSize = canvasSize.width / this.columns;
-    this.nodes = [];
+    this.nodeArray = [];
     this.spawn = null
     this.exit = null
 
     for (var i = 0; i < (this.rows * this.columns); i++) {
-      this.nodes.push(null);
+      this.nodeArray.push(null);
     }
   }
 
@@ -45,12 +45,12 @@
 
   Grid.prototype.getNode = function (x, y) {
     var index = (this.columns*y) + x;
-    return this.nodes[index];
+    return this.nodeArray[index];
   }
 
   Grid.prototype.setNode = function (x, y, value) {
     var index = (this.columns*y) + x;
-    this.nodes[index] = value;
+    this.nodeArray[index] = value;
   }
 
   Grid.prototype.destroyNode = function (x, y) {
