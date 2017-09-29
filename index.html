@@ -1,6 +1,6 @@
 <head>
   <link href = "css/index.css" rel = "stylesheet" type = "text/css">
-<title>Matter.js Basics Tutorial</title>
+<title>Ballings</title>
 <meta name="author" content="John Day">
 <script src="js/lib/matter.js"></script>
 <script src="js/lemming.js"></script>
@@ -50,7 +50,7 @@
     Events.on(engine, 'mousedown', function(event) {
     var mousePosition = event.mouse.position;
     mouseIsDown = true;
-    console.log(mousePosition)
+    console.log(mousePosition);
     });
 
     // Events.on(engine, 'mousedown', function(event) {
@@ -60,6 +60,38 @@
     //       y: -0.01
     //       };
     //     });
+
+
+    // MouseConstraint.update = function(mouseConstraint, bodies) {
+    // var mouse = mouseConstraint.mouse,
+    // constraints = [];
+    // constraint = mouseConstraint.constraints[0];
+    //
+    //     if (mouse.button === 0 || mouse.button === 2) {
+    //         if (!constraint.bodyB) {
+    //             for (var i = 0; i < bodies.length; i++) {
+    //                 var body = bodies[i];
+    //                 if (Bounds.contains(body.bounds, mouse.position)  && Vertices.contains(body.vertices, mouse.position)) {
+    //                     constraint.pointA = mouse.position;
+    //                     constraint.bodyB = body;
+    //                     constraint.pointB = { x: mouse.position.x - body.position.x, y: mouse.position.y - body.position.y };
+    //                     constraint.angleB = body.angle;
+    //                     Sleeping.set(body, false);
+    //  Events.trigger(engine, 'bodytouched', lemming.shape);
+    //         }
+    //       }
+    //     }
+    // } else {
+    // constraint.bodyB = null;
+    // constraint.pointB = null;
+    // }
+    //
+    //     if (constraint.bodyB) {
+    //         Sleeping.set(constraint.bodyB, false);
+    //         constraint.pointA = mouse.position;
+    //     }
+    // };
+
 
     layerNodes = 40;
     layers = 20;
@@ -74,11 +106,14 @@
 
     var defaultCategory = 0x0001;
     var lemmingCategory = 0x0002;
-    for (var i = 0; i < 1000; i++) {
+    var lemmings = [];
+    for (var i = 0; i < 10; i++) {
       setTimeout(function(){
-        new Lemming(grid.spawn);
+        lemmings.push(new Lemming(grid.spawn));
+        console.log(lemmings);
       }, i * 1000);
     };
+
 
     Events.on(engine, 'collisionStart', function(event){
 
@@ -93,11 +128,11 @@
 
           if (lemming.position.x >= grid.exit.x) {
             exitArray.push(1)
-            console.log(exitArray)
             World.remove(engine.world, [lemming])
             document.getElementById("score").innerHTML = exitArray.length
             return
           }
+
 
           if (lemming.velocity.x >= 0) {
             Matter.Body.setVelocity(lemming, { x: 3, y: -1 })
@@ -108,6 +143,23 @@
         };
       };
     });
+
+    Events.on(mouseConstraint, "startdrag", function(event) {
+      console.log(mouse.position.x);
+      console.log(event.body.position.x);
+
+      bodies = Composite.allBodies(engine.world)
+      var endPoint = {x: event.body.position.x, y: event.body.position.y-20}
+      var diggings = Query.point(bodies, endPoint);
+      console.log(diggings);
+      if(diggings.length > 0) {
+        World.remove(engine.world, [diggings[0]], true)
+      }
+    })
+
+
+
+
     run();
   </script>
 </body>
