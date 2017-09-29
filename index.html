@@ -70,10 +70,10 @@
 
     Events.on(engine, 'collisionStart', function(event){
       if (lemming.shape.velocity.x >= 0) {
-        Body.setVelocity(lemming.shape, { x: 2, y: -0.5 })
+        Body.setVelocity(lemming.shape, { x: 3, y: -1 })
       };
       if (lemming.shape.velocity.x < 0) {
-        Body.setVelocity(lemming.shape, { x: -2, y: -0.5})
+        Body.setVelocity(lemming.shape, { x: -3, y: -1})
       };    });
 
     layerNodes = 40;
