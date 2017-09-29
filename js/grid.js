@@ -8,7 +8,6 @@
     this.nodeArray = [];
     this.spawn = null
     this.exit = null
-
     for (var i = 0; i < (this.rows * this.columns); i++) {
       this.nodeArray.push(null);
     }
